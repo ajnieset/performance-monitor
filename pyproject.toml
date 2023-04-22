@@ -6,11 +6,11 @@ authors = ["Austin Nieset <austin.nieset@getordermark.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.9"
+ruff = "^0.0.257"
 
 [tool.poetry.dev-dependencies]
 black = "^22.3.0"
 isort = "^5.10.1"
-mypy = "^0.942"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

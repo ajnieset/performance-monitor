@@ -18,8 +18,8 @@ class PerformanceMonitor:
     Call `end` to end timer for the most recently started block
     """
 
-    start_time: Optional[float] = field(default=None, init=False, repr=False)
-    end_time: Optional[float] = field(default=None, init=False, repr=False)
+    start_time: float | None = field(default=None, init=False, repr=False)
+    end_time: float | None = field(default=None, init=False, repr=False)
     timer_blocks: dict = field(default_factory=dict)
     logger: Optional[Callable[[str], None]] = print
 
@@ -34,7 +34,7 @@ class PerformanceMonitor:
 
     def start(self) -> None:
         """
-        Start timer. if timer is running it will reset the timer
+        Start timer. if timer is running it will overrite the starting time
         """
         self.start_time = time.perf_counter()
 
@@ -66,7 +66,7 @@ class PerformanceMonitor:
         Save the timer results to blocks. Resets the times to
         """
         try:
-            elapsed = float(self.end_time) - float(self.start_time)
+            elapsed = float(self.end_time - self.start_time)
             self.timer_blocks.update(
                 {
                     block_name: {
